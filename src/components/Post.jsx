@@ -1,3 +1,5 @@
+import { Comment } from "./Comment";
+import { Avatar } from "./Avatar";
 import styles from "./Post.module.css";
 
 export function Post() {
@@ -5,10 +7,9 @@ export function Post() {
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <img
+                    <Avatar
                         className={styles.avatar}
                         src="https://github.com/lucasmbrute2.png"
-                        alt="Profile photo"
                     />
                     <div className={styles.authorInfo}>
                         <strong>Lucas Dantas</strong>
@@ -29,9 +30,8 @@ export function Post() {
                     <p>Fala galeraa 👋</p>
 
                     <p>
-                        Acabei de subir mais um projeto no meu portifa. É um
-                        projeto que fiz no NLW Return, evento da Rocketseat. O
-                        nome do projeto é DoctorCare 🚀
+                        Acabei de subir mais um projeto no meu portifa. O nome
+                        do projeto é🚀
                     </p>
 
                     <p>
@@ -55,6 +55,12 @@ export function Post() {
                     <button type="submit">Publicar</button>
                 </footer>
             </form>
+
+            <div className={styles.commentList}>
+                <Comment />
+                <Comment />
+                <Comment />
+            </div>
         </article>
     );
 }
