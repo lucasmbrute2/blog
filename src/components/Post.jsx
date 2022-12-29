@@ -5,7 +5,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 
 export function Post({ post }) {
-    const { publishedAt, author } = post;
+    const { publishedAt, author, content } = post;
 
     const publishedDateFormatted = format(
         publishedAt,
@@ -40,27 +40,18 @@ export function Post({ post }) {
             </header>
 
             <div className={styles.content}>
-                <p>
-                    <p>Fala galeraa 👋</p>
-
-                    <p>
-                        Acabei de subir mais um projeto no meu portifa. O nome
-                        do projeto é🚀
-                    </p>
-
-                    <p>
-                        <a href="#">jane.design/doctorcare</a>
-                    </p>
-
-                    <p>
-                        <a href="#">
-                            <a href="#">#novoprojeto</a> <a href="#">#nlw</a>{" "}
-                            <a href="#">#rocketseat</a>
-                        </a>
-                    </p>
-                </p>
+                {content.map((item) => {
+                    if (item.type === "paragraph") {
+                        return <p>{item.content}</p>;
+                    } else if (item.type === "link") {
+                        return (
+                            <p>
+                                <a href="#">{item.content}</a>
+                            </p>
+                        );
+                    }
+                })}
             </div>
-
             <form className={styles.commentForm}>
                 <strong>Deixe seu feedback</strong>
                 <textarea placeholder="Deixe um comentário " />
