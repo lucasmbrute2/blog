@@ -21,12 +21,16 @@ export function Post({ post }) {
 
     const handleCommentSubmit = (e) => {
         e?.preventDefault();
-        setComments([...prev, newCommentText]);
+        if (!newCommentText.length || comments.indexOf(newCommentText) > 1)
+            return;
+
+        setComments([...comments, newCommentText]);
+        setNewCommentText("");
     };
 
     const handleNewCommentChange = (e) => {
+        console.log(e.target.value);
         setNewCommentText(e.target.value);
-        setNewCommentText("");
     };
 
     const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
@@ -56,10 +60,10 @@ export function Post({ post }) {
             <div className={styles.content}>
                 {content.map((item) => {
                     if (item.type === "paragraph") {
-                        return <p>{item.content}</p>;
+                        return <p key={item.content}>{item.content}</p>;
                     } else if (item.type === "link") {
                         return (
-                            <p>
+                            <p key={item.content}>
                                 <a href="#">{item.content}</a>
                             </p>
                         );
@@ -82,7 +86,12 @@ export function Post({ post }) {
 
             <div className={styles.commentList}>
                 {comments.map((comment) => (
-                    <Comment content={comment} />
+                    <Comment
+                        key={comment}
+                        content={comment}
+                        comments={comments}
+                        setComments={setComments}
+                    />
                 ))}
             </div>
         </article>
