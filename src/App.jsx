@@ -10,7 +10,7 @@ const posts = [
         author: {
             avatarUrl: "https://github.com/lucasmbrute2.png",
             name: "Lucas",
-            role: "developer",
+            role: "Full stack developer",
         },
         publishedAt: new Date("2022-12-25 20:00:00"),
         content: [
