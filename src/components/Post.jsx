@@ -21,8 +21,7 @@ export function Post({ post }) {
 
     const handleCommentSubmit = (e) => {
         e?.preventDefault();
-        if (!newCommentText.length || comments.indexOf(newCommentText) > 1)
-            return;
+        if (!newCommentText.length || comments.includes(newCommentText)) return;
 
         setComments([...comments, newCommentText]);
         setNewCommentText("");
@@ -37,6 +36,14 @@ export function Post({ post }) {
         locale: ptBR,
         addSuffix: true,
     });
+
+    const deleteComment = (content) => {
+        const commentsWithoutDeletedOne = comments.filter(
+            (comment) => comment !== content
+        );
+
+        setComments(commentsWithoutDeletedOne);
+    };
 
     return (
         <article className={styles.post}>
@@ -89,8 +96,7 @@ export function Post({ post }) {
                     <Comment
                         key={comment}
                         content={comment}
-                        comments={comments}
-                        setComments={setComments}
+                        onDeleteComment={deleteComment}
                     />
                 ))}
             </div>
